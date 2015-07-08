@@ -1,0 +1,16 @@
+<h1>Todos los Alumnos</h1>
+
+<div ng-controller="IndexController as ctrl">
+    <ul ng-repeat="student in ctrl.students">
+      
+        <li>
+            {{student.name}} - {{student.age}} 
+            <a ng-href="#/editar/{{student._id}}">editar</a>
+            <a ng-href="#" ng-click="ctrl.delete(student._id);">borrar</a>
+            <a ng-href="#/ver/{{student._id}}">ver</a>
+        </li>
+      
+    </ul>
+</div>
+
+<a ng-href="#/nuevo">nuevo</a>
