@@ -1,13 +1,15 @@
-<h1>Todos los Alumnos</h1>
+<h1>Todos los pacientes</h1>
 
 <div ng-controller="IndexController as ctrl">
     <ul ng-repeat="student in ctrl.students">
       
         <li>
-            {{student.name}} - {{student.age}} 
-            <a ng-href="#/editar/{{student._id}}">editar</a>
+            {{student.name}} - {{student.age}}
+            <a ng-href="#/dp/{{student._id}}">Datos Personales</a>
             <a ng-href="#" ng-click="ctrl.delete(student._id);">borrar</a>
+            <a ng-href="#/editar/{{student._id}}">editar</a>
             <a ng-href="#/ver/{{student._id}}">ver</a>
+            <a ng-href="#/sesiones">sesiones</a>
         </li>
       
     </ul>

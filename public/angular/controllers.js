@@ -108,3 +108,55 @@
         model.load();
     }]);
 })();
+
+(function() {
+    var app = angular.module('app');
+    
+    app.controller('IndexSesionesController', ['$http', '$location', function($http, $location) {
+        var model = this;
+        model.sesiones = [];
+                
+        $http.get('/sesiones').success(function(data){
+            model.sesiones = data;
+            console.log(data);
+        });
+        
+        model.delete = function(id) {
+            $http({
+                url: '/api/sesiones/' + id,
+                method: "DELETE",
+            }).success(function (data, status, headers, config) {
+                $location.path('/sesiones');
+            }).error(function (data, status, headers, config) {
+                console.log(status);                
+            });
+        }
+        
+    }]);
+})();
+
+(function() {
+    var app = angular.module('app');
+    
+    app.controller('NuevaSController', ['$http', '$location', function($http, $location) {
+        var model = this;
+        model.fecha = '';
+        model.noSesion = '';
+        model.sintomas = '';
+        model.resumenSesion = '';
+        model.proximaSesion = '';
+        model.tarea = '';
+
+        model.save = function() {            
+            $http({
+                url: '/sesiones',
+                method: "POST",
+                data: model,
+            }).success(function (data, status, headers, config) {
+                $location.path('/sesiones');
+            }).error(function (data, status, headers, config) {
+                console.log(status);                
+            });
+        }        
+    }]);
+})();

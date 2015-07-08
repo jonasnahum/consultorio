@@ -1,0 +1,16 @@
+<h1>Todas las sesiones de jonas</h1>
+
+<div ng-controller="IndexSesionesController as ctrl">
+    <ul ng-repeat="sesion in ctrl.sesiones">
+      
+        <li>
+             Fecha de sesion{{sesion.fecha}} no.{{sesion.noSesion}}
+            <a ng-href="#" ng-click="ctrl.delete(sesion._id);">borrar</a>
+            <a ng-href="#/editar/{{student._id}}">editar</a>
+            <a ng-href="#/ver/{{student._id}}">ver</a>
+        </li>
+      
+    </ul>
+</div>
+
+<a ng-href="#/nuevaS">nuevo</a>
