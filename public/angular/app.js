@@ -8,8 +8,9 @@
         .when("/nuevo", { templateUrl: "angular/views/nuevo.html" })
         .when("/editar/:id", { templateUrl: "angular/views/editar.html" })
         .when("/ver/:id", { templateUrl: "angular/views/ver.html" })
-        .when("/sesiones", { templateUrl: "angular/views/sesiones/todas.html" })
-        .when("/nuevaS", { templateUrl: "angular/views/sesiones/nuevaS.html" })
+        .when("/sesiones/:id", 
+              { templateUrl: "angular/views/sesiones/todas.html" })
+        .when("/nuevaS/:id", { templateUrl: "angular/views/sesiones/nuevaS.html" })
         .otherwise({ redirectTo: "/" });        
     }]);
     

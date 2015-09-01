@@ -1,6 +1,9 @@
-<h1>Todas las sesiones de jonas</h1>
+
 
 <div ng-controller="IndexSesionesController as ctrl">
+    <h1>Sesiones del paciente : {{ctrl.name}}</h1>
+    <h2>Edad : {{ctrl.age}}</h2>
+    <h2>Id : {{ctrl.id}}</h2>
     <ul ng-repeat="sesion in ctrl.sesiones">
       
         <li>
@@ -11,6 +14,6 @@
         </li>
       
     </ul>
+    que ponga aqui el id texto
+    <a ng-href="#/nuevaS/{{ctrl.id}}">Agregar sesion</a>
 </div>
-
-<a ng-href="#/nuevaS">nuevo</a>

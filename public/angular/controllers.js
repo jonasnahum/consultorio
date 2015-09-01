@@ -112,36 +112,38 @@
 (function() {
     var app = angular.module('app');
     
-    app.controller('IndexSesionesController', ['$http', '$location', function($http, $location) {
+    app.controller('IndexSesionesController', ['$http', '$location', '$routeParams', function($http, $location, $routeParams) {
         var model = this;
-        model.sesiones = [];
-                
-        $http.get('/sesiones').success(function(data){
-            model.sesiones = data;
-            console.log(data);
-        });
-        
-        model.delete = function(id) {
+        model.name = '';
+        model.age = '';
+        model.id = $routeParams.id;        
+        model.sesiones = [];        
+      
+        model.load = function() {            
             $http({
-                url: '/api/sesiones/' + id,
-                method: "DELETE",
+                url: '/api/students/sesiones/' + $routeParams.id,
+                method: "GET",
             }).success(function (data, status, headers, config) {
-                $location.path('/sesiones');
+                model.name = data.name;
+                model.age = data.age;
+                model.id = data._id;
+                model.sesiones = data.sesiones;
+                
             }).error(function (data, status, headers, config) {
                 console.log(status);                
             });
         }
-        
+        model.load();
     }]);
 })();
 
 (function() {
     var app = angular.module('app');
     
-    app.controller('NuevaSController', ['$http', '$location', function($http, $location) {
+    app.controller('NuevaSController', ['$http', '$location','$routeParams',  function($http, $location, $routeParams) {
         var model = this;
         model.fecha = '';
-        model.noSesion = '';
+        model.noSesion = 0;
         model.sintomas = '';
         model.resumenSesion = '';
         model.proximaSesion = '';
@@ -149,13 +151,13 @@
 
         model.save = function() {            
             $http({
-                url: '/sesiones',
+                url: '/api/students/' + $routeParams.id,
                 method: "POST",
                 data: model,
             }).success(function (data, status, headers, config) {
-                $location.path('/sesiones');
-            }).error(function (data, status, headers, config) {
-                console.log(status);                
+                $location.path('/sesiones/' + $routeParams.id);
+            }).error(function(data, status, headers, config){
+                console.error('%s %s %s', config.method, config.url, status);
             });
         }        
     }]);
